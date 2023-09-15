@@ -7,13 +7,13 @@ def main():
     body = r.json()
     c = Calendar()
 
-    locations = {l["id"]: l["name"]["es"] for l in body["locations"]}
     for session in body["sessions"]:
+
         e = Event()
         e.name = session["name"]["en"]
         e.begin = session["start_date"]
         e.end = session["end_date"]
-        e.location = locations[session["locations"][0]]
+        e.location = body["locations"][0]["name"]["es"]
         e.uid = session["id"]
         c.events.add(e)
 
